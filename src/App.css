@@ -1,0 +1,218 @@
+body {
+  background-color: rgb(236, 236, 236);
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.page {
+  display: flex;
+  max-width: 950px;
+  height: 800px;
+  margin: auto;
+  margin-top: 50px;
+}
+
+.flex {
+  display: flex;
+}
+
+.block {
+  display: block;
+}
+
+/* Home page styling */
+.side {
+  width: 50%;
+  height: 100%;
+}
+
+.vertical-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  margin: auto;
+}
+
+.button {
+  background-color: #008cba;
+  cursor: pointer;
+  color: white;
+  width: 100px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  margin-top: 20px;
+  font-weight: normal;
+  margin-right: 5px;
+  margin-left: 5px;
+}
+
+.button.false {
+  background-color: #2c677a;
+}
+
+.overview {
+  margin-top: 10%;
+  margin-left: 10%;
+  height: 100%;
+}
+
+.totaltime {
+  padding: 5px 15px;
+}
+
+/* Overview of timers */
+.timers {
+  /* background-color: rgb(80, 160, 146); */
+  border: rgb(216, 135, 106);
+  border-style: solid;
+  border-width: 2px;
+  width: 300px;
+  height: 450px;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+
+.timer {
+  height: 100px;
+  background-color: rgb(255, 255, 255);
+  border-bottom: 2px dotted coral;
+  color: #0c0c0c;
+}
+
+.timer.false {
+  background-color: rgb(255, 239, 231);
+  color: #6e6e6e;
+}
+
+.timertitle {
+  font-family: "Cambria", sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  display: inline-block;
+  margin-top: 20px;
+  margin-left: 15px;
+}
+
+.duration {
+  margin-top: 2px;
+  margin-left: 15px;
+}
+
+.remove {
+  float: right;
+  background-color: rgba(189, 189, 189, 0.158);
+  border-radius: 5px;
+  padding: 7px 10px;
+  border-style: none;
+  color: #a7a7a7;
+  font-weight: bold;
+  margin: 10px;
+}
+
+.remove:hover {
+  background-color: rgba(189, 189, 189, 0.342);
+  cursor: pointer;
+}
+
+.clock {
+  font-family: "Fira Code", monospace;
+  font-size: 85px;
+  background-color: #ffffff;
+  border-radius: 20px;
+  padding-left: 15px;
+  padding-right: 15px;
+  box-shadow: 3px 3px 4px #b1b1b1;
+  margin-left: 5px;
+}
+
+.clock.running {
+  box-shadow: 0px 0px 10px #00c3ff;
+}
+
+.clock.finished {
+  box-shadow: 0px 0px 10px #17be01;
+}
+
+.title {
+  font-family: "Cambria", sans-serif;
+  font-size: 60px;
+  padding-bottom: 10px;
+  margin-left: 5px;
+  height: 72px;
+}
+
+.messages {
+  height: 85px;
+  margin-left: 5px;
+  padding-top: 10px;
+}
+
+.line {
+  height: 7px;
+}
+
+/* Add page styling */
+
+input[type="number"] {
+  width: 50px;
+  height: 35px;
+  font-size: 20px;
+  margin-bottom: 10px;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 5px;
+  border-color: #ced4da;
+  padding-left: 3px;
+}
+
+input[type="number"]:invalid {
+  outline-width: 3px;
+  outline-style: solid;
+  outline-color: #f0b4b4;
+}
+
+input[type="number"]:focus {
+  outline-width: 3px;
+  outline-style: solid;
+  outline-color: #b4ccf0;
+}
+
+select {
+  margin: auto;
+  width: 300px;
+  border-style: none;
+  /* background-color: rgb(149, 149, 149); */
+  background-color: tomato;
+  border-radius: 5px;
+  border-color: rgb(138, 138, 138);
+  color: white;
+}
+
+.margin {
+  margin-bottom: 20px;
+}
+
+.inputform {
+  padding: 10px 15px;
+  font-size: 22px;
+  font-weight: 500;
+  /* background-color: teal; */
+}
+
+.formline {
+  /* background-color: tomato; */
+  display: flex;
+
+  /* margin-bottom: 20px; */
+}
+
+.right {
+  margin-right: 0px;
+  margin-left: auto;
+  /* background-color: teal; */
+  width: fit-content;
+  padding-left: 10px;
+}
