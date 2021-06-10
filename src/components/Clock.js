@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
-import { AppContext } from "providers/AppProvider";
+import { AppContext } from "AppProvider";
 import { useContext, useEffect } from "react";
 import { ToTime, FormatTime, ToSeconds } from "Functions.js";
 import Button from "components/Button";
@@ -43,16 +43,16 @@ function Display() {
     return ToTime(togo);
   };
 
-  //TODO make modular, create flag for up or down.
   // Get the right direction of time.
   if (present) {
     const timer = timers[status.timerIndex];
-    const { endtime, worktime, countUp } = timer.input;
+    const { endtime, worktime, countUp } = timer;
     if (countUp) {
       time = ToTime(elapsed);
     } else {
       if (timer.mode === "tabata") {
         time = status.work ? worktime : endtime;
+        time = down(time);
       } else {
         time = down(endtime);
       }

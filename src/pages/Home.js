@@ -1,7 +1,7 @@
 import "App.css";
 import Button from "components/Button";
 import Clock from "components/Clock";
-import { AppContext } from "providers/AppProvider";
+import { AppContext } from "AppProvider";
 import { useContext, useEffect, useRef } from "react";
 import { LABELS } from "Static";
 import { ToTime, FormatTime } from "Functions";
@@ -14,7 +14,7 @@ function TotalTime() {
   // If there are timers, add their durations.
   if (timers.length > 0) {
     timers.forEach((timer) => {
-      TotalDuration = TotalDuration + timer.input.duration;
+      TotalDuration = TotalDuration + timer.duration;
     });
   }
 
@@ -30,10 +30,7 @@ function TotalTime() {
 // Returns a single timer element.
 function Timer({ timer, id }) {
   const { removeTimer, status, onSelect } = useContext(AppContext);
-  const {
-    mode,
-    input: { duration },
-  } = timer;
+  const { mode, duration } = timer;
   const { h, m, s } = FormatTime(ToTime(duration));
 
   // Process only one event at a time, because button overlays timer.

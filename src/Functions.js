@@ -25,14 +25,13 @@ const ToSeconds = ({ h, m, s }) => {
 const AddTimes = (first, second) => {
   const a = ToSeconds(first);
   const b = ToSeconds(second);
-
   return ToTime(a + b);
 };
 
 // Returns the duration of the current input in seconds.
 const GetDuration = (input) => {
   const totalTime = AddTimes(input.worktime, input.endtime);
-  const duration = input.rounds.rounds * ToSeconds(totalTime);
+  const duration = input.rounds * ToSeconds(totalTime);
   return duration;
 };
 
@@ -49,14 +48,7 @@ const GetFinish = ({ timers, elapsed, status, callbacks }) => {
 
   // Get the limits of the current timer.
   const timer = timers[status.timerIndex];
-  const {
-    mode,
-    input: {
-      endtime,
-      worktime,
-      rounds: { rounds },
-    },
-  } = timer;
+  const { mode, endtime, worktime, rounds } = timer;
 
   // Compare the timelimit to the current time.
   const endTimeFinished = compareTime(endtime, elapsed);

@@ -21,8 +21,8 @@ const AppProvider = ({ children }) => {
   const [status, setStatus] = useState(DEFAULTSTATUS);
 
   // TIMER FUNCTIONS
-  const pushToTimers = ({ mode, input }) => {
-    setTimers((prev) => [...prev, { mode, input }]);
+  const pushToTimers = (input) => {
+    setTimers((prev) => [...prev, input]);
   };
 
   const clearTimers = () => {

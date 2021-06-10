@@ -1,5 +1,13 @@
-import { TimeInput, Input } from "components/Inputs";
 import { FormatTime } from "Functions";
+
+// Minimal 1 round, this is also used for 'stopwatch'.
+const DEFAULTINPUT = {
+  mode: "stopwatch",
+  endtime: { h: 0, m: 0, s: 0 },
+  worktime: { h: 0, m: 0, s: 0 },
+  rounds: 1,
+  duration: 0,
+};
 
 // Select input components for each mode.
 const MODES = {
@@ -14,13 +22,6 @@ const COUNTUP = {
   countdown: false,
   xy: false,
   tabata: false,
-};
-
-// Input rounds does not need unit.
-const INPUTMODULES = {
-  endtime: <TimeInput setting="endtime" />,
-  worktime: <TimeInput setting="worktime" />,
-  rounds: <Input setting="rounds" />,
 };
 
 // Labels that are displayed to the user.
@@ -58,8 +59,7 @@ const LABELS = {
 // Get dynamic status messages.
 const GetMessage = ({ timer, status, phase }) => {
   const { mode } = timer;
-  const { worktime, endtime } = timer.input;
-  const { rounds } = timer.input.rounds;
+  const { worktime, endtime, rounds } = timer;
   const { round, work } = status;
 
   const { endtime: endTimeLabel, worktime: workTimeLabel } =
@@ -114,4 +114,4 @@ const GetMessage = ({ timer, status, phase }) => {
   return message[phase];
 };
 
-export { MODES, INPUTMODULES, LABELS, COUNTUP, GetMessage };
+export { MODES, LABELS, COUNTUP, DEFAULTINPUT, GetMessage };
