@@ -56,7 +56,8 @@ Control timer:
 # Design
 
 This is a singlepage app. The urls are set in router-dom.\
-The Add page has access to Inputcontext, when 'set' it will add the current input to a list in the Appcontext, to wich the whole app has access to.
+The whole app has access to AppContext. \
+When you 'Set' a new time the current input will be added to the array of timers.\
 
 # Acknowledgements
 
