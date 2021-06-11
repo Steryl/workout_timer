@@ -4,19 +4,25 @@ import { useEffect, useState } from "react";
 import { LABELS } from "Static";
 
 // Returns a number input field.
-function Input({ name, value, placeholder = "0", max = "", onChange }) {
-  const [input, setInput] = useState(0);
+// 'name' can be: h; m; s or 'rounds'.
+function Input({ name, value, min = 0, max = "", onChange }) {
+  const [input, setInput] = useState(min);
   const label = LABELS.units[name];
 
+  // When input is changes check the validity and set the state.
   const handleChange = (e) => {
-    const { validity, value } = e.target;
-    if (validity) setInput(parseInt(value));
+    const { validity, value: newValue } = e.target;
+    if (validity) {
+      setInput(parseInt(newValue));
+    }
   };
 
+  // Return to parent module after each valid change.
   useEffect(() => {
     onChange({ input, name });
   }, [input]);
 
+  // Use String(value) to prevent NaN errors.
   return (
     <div className="right">
       <label htmlFor={name}>{label}:</label>
@@ -24,46 +30,14 @@ function Input({ name, value, placeholder = "0", max = "", onChange }) {
         type="number"
         name={name}
         onChange={handleChange}
-        value={value}
+        value={String(value)}
         pattern="\d*"
-        placeholder={placeholder}
-        min="0"
+        placeholder={min}
+        min={min}
         max={max}
       />
     </div>
   );
 }
-
-// Setting can be rounds, endtime or worktime. Units = h,m,s or null.
-// export function Input({ value }) {
-//   const minimal = DEFAULTINPUT[setting][unit];
-//   const [value, setValue] = useState("");
-//   const inputRef = useRef();
-
-//   // Reset value when other mode is selected.
-//   useEffect(() => {
-//     if (reset) {
-//       setValue("");
-//       hasReset();
-//     }
-//   }, [reset]);
-
-//   // If the user imput is empty use the default value.
-//   useEffect(() => {
-//     let newValue = value === "" ? minimal : value;
-//     newValue = parseInt(newValue);
-
-//     pushToInput({ mode, setting, unit, value: newValue });
-//   }, [value]);
-
-//   // In the event of user input.
-//   const handleChange = (e) => {
-//     const { valid } = inputRef.current.validity;
-
-//     if (valid) {
-//       setValue(e.target.value);
-//     }
-//   };
-// }
 
 export default Input;

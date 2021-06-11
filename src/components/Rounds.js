@@ -20,12 +20,13 @@ function Rounds({ mode, onChange }) {
     setRounds(defaultRounds);
   }, [mode]);
 
+  // TODO set max rounds.
   return (
     <Input
       name="rounds"
       value={rounds}
-      placeholder={defaultRounds}
       onChange={handleChange}
+      setting="rounds"
     />
   );
 }

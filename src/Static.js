@@ -1,6 +1,6 @@
 import { FormatTime } from "Functions";
 
-// Minimal 1 round, this is also used for 'stopwatch'.
+// Modes without rounds need 'rounds' to be 1.
 const DEFAULTINPUT = {
   mode: "stopwatch",
   endtime: { h: 0, m: 0, s: 0 },
@@ -9,7 +9,6 @@ const DEFAULTINPUT = {
   duration: 0,
 };
 
-// Select input components for each mode.
 const MODES = {
   stopwatch: ["endtime"],
   countdown: ["endtime"],
