@@ -38,8 +38,8 @@ function InputForm({ onChange }) {
     tabata: (
       <>
         <Rounds mode={form.mode} onChange={handleInput} />
-        <TimeInput mode={form.mode} onChange={handleInput} />
         <TimeInput setting="worktime" mode={form.mode} onChange={handleInput} />
+        <TimeInput mode={form.mode} onChange={handleInput} />
       </>
     ),
   };

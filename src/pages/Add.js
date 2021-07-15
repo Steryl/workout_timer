@@ -2,7 +2,7 @@ import "App.css";
 import Button from "components/Button";
 import React, { useContext, useState } from "react";
 import { AppContext } from "AppProvider";
-import { LABELS, DEFAULTINPUT } from "Static";
+import { LABELS, DEFAULTINPUT, COUNTUP } from "Static";
 import { GetDuration } from "Functions";
 import InputForm from "components/InputForm";
 
@@ -21,7 +21,8 @@ function Add() {
 
   const handleChange = (form) => {
     const duration = GetDuration(form);
-    setInput({ ...form, duration });
+    const countup = COUNTUP[form.mode];
+    setInput({ ...form, duration, countup });
   };
 
   return (

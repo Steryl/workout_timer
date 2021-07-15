@@ -7,6 +7,7 @@ const DEFAULTINPUT = {
   worktime: { h: 0, m: 0, s: 0 },
   rounds: 1,
   duration: 0,
+  countup: true,
 };
 
 const MODES = {
