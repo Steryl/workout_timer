@@ -46,8 +46,8 @@ function Display() {
   // Get the right direction of time.
   if (present) {
     const timer = timers[status.timerIndex];
-    const { endtime, worktime, countUp } = timer;
-    if (countUp) {
+    const { endtime, worktime, countup } = timer;
+    if (countup) {
       time = ToTime(elapsed);
     } else {
       if (timer.mode === "tabata") {
