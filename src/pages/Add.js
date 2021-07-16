@@ -2,7 +2,7 @@ import "App.css";
 import Button from "components/Button";
 import React, { useContext, useState } from "react";
 import { AppContext } from "AppProvider";
-import { LABELS, DEFAULTINPUT, MODES } from "Static";
+import { LABELS, DEFAULTINPUT } from "Static";
 import InputForm from "components/InputForm";
 
 // Return a form to add a timer.
@@ -17,13 +17,10 @@ function Add() {
     pushToTimers(input);
   };
 
+  // Set also invalid input to prevent errors.
   const handleChange = (form) => {
     setValid(form.duration > 0);
-
-    if (valid) {
-      const countup = MODES[form.mode].countup;
-      setInput({ ...form, countup });
-    }
+    setInput(form);
   };
 
   return (

@@ -10,7 +10,6 @@ const DEFAULTINPUT = {
   rounds: 1,
   duration: 0,
   countup: true,
-  // valid: false,
 };
 
 // Choose the maximum values for these inputs.

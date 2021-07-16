@@ -15,8 +15,12 @@ function InputForm({ onChange }) {
   // Input can be either timeobject or integer for rounds.
   const handleInput = ({ input, setting }) => {
     const newForm = { ...form, [setting]: input };
+
+    // Empty fields are NaN, take default value for those.
+    // const cleanForm = removeNaN(newForm, DEFAULTINPUT);
     const duration = GetDuration(newForm);
-    setForm({ ...newForm, duration });
+    const countup = MODES[form.mode].countup;
+    setForm({ ...newForm, duration, countup });
   };
 
   // When selecting a different mode reset the input.
@@ -29,9 +33,10 @@ function InputForm({ onChange }) {
     onChange(form);
   }, [form]);
 
-  // Create a array of input components, depending on the mode.
+  // Return an array of input components, depending on the mode.
   const getInputs = () => {
     const inputs = MODES[form.mode].inputs;
+
     return inputs.map((input, i) =>
       React.cloneElement(INPUTS[input], {
         key: i,
