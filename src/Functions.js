@@ -7,6 +7,7 @@ function FormatTime({ h, m, s }) {
   return { h, m: format(m), s: format(s) };
 }
 
+// TODO change functionnames to camelcase.
 // Changes seconds to time format.
 function ToTime(seconds = 0) {
   const s = Math.floor(seconds % 60);

@@ -3,16 +3,14 @@ import Button from "components/Button";
 import React, { useContext, useState } from "react";
 import { AppContext } from "AppProvider";
 import { LABELS, DEFAULTINPUT, MODES } from "Static";
-import { GetDuration } from "Functions";
 import InputForm from "components/InputForm";
 
 // Return a form to add a timer.
 function Add() {
   const [input, setInput] = useState(DEFAULTINPUT);
+  const [valid, setValid] = useState(false);
   const { pushToTimers } = useContext(AppContext);
   const { titles, buttons } = LABELS;
-
-  const setActive = input.duration > 0;
 
   // Push input to Appcontext when set.
   const handleSet = () => {
@@ -20,9 +18,12 @@ function Add() {
   };
 
   const handleChange = (form) => {
-    const duration = GetDuration(form);
-    const countup = MODES[form.mode].countup;
-    setInput({ ...form, duration, countup });
+    setValid(form.duration > 0);
+
+    if (valid) {
+      const countup = MODES[form.mode].countup;
+      setInput({ ...form, countup });
+    }
   };
 
   return (
@@ -33,7 +34,7 @@ function Add() {
           <InputForm onChange={handleChange} />
           <div className="flex">
             <Button link="/">{buttons.cancel}</Button>
-            <Button link="/" onClick={handleSet} active={setActive}>
+            <Button link="/" onClick={handleSet} active={valid}>
               {buttons.set}
             </Button>
           </div>

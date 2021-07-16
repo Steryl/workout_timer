@@ -1,7 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
+//TODO clean up inputs
 import { useEffect, useState } from "react";
 import { DEFAULTINPUT, INPUTS, MODES } from "Static";
+import { GetDuration } from "Functions";
 import Select from "components/Select";
 import React from "react";
 
@@ -12,7 +14,9 @@ function InputForm({ onChange }) {
   // Setting can be endtime, worktime or rounds.
   // Input can be either timeobject or integer for rounds.
   const handleInput = ({ input, setting }) => {
-    setForm({ ...form, [setting]: input });
+    const newForm = { ...form, [setting]: input };
+    const duration = GetDuration(newForm);
+    setForm({ ...newForm, duration });
   };
 
   // When selecting a different mode reset the input.
@@ -20,8 +24,7 @@ function InputForm({ onChange }) {
     setForm({ ...DEFAULTINPUT, mode });
   };
 
-  // When the input on the form changes, return it to calculate
-  // if the minimim duration is 0, to enable 'set' button.
+  // When the input on the form changes, return it.
   useEffect(() => {
     onChange(form);
   }, [form]);

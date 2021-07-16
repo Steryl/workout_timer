@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
 import { useEffect, useState } from "react";
-import { LABELS, DEFAULTINPUT } from "Static";
+import { LABELS, DEFAULTINPUT, MAXINPUT } from "Static";
 import Input from "components/Input";
 
 // Return three inputs for h,m,s.
@@ -39,7 +39,7 @@ function TimeInput({
         value={time.h}
         onChange={handleChange}
         min={defaultTime.h}
-        max=""
+        max={MAXINPUT.hours}
       />
       <Input
         name="m"

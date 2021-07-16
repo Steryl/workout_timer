@@ -12,7 +12,7 @@ function Input({ name, value, min = 0, max = "", onChange }) {
   // When input is changes check the validity and set the state.
   const handleChange = (e) => {
     const { validity, value: newValue } = e.target;
-    if (validity) {
+    if (validity.valid) {
       setInput(parseInt(newValue));
     }
   };
