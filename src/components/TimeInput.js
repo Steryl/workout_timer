@@ -1,8 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
 import { useEffect, useState } from "react";
-import { LABELS, DEFAULTINPUT } from "Static";
+import { LABELS, DEFAULTINPUT, MAXINPUT } from "Static";
 import Input from "components/Input";
+import { replaceNaN } from "Functions";
 
 // Return three inputs for h,m,s.
 // Setting can be either endtime or worktime.
@@ -11,7 +12,8 @@ function TimeInput({
   setting = "endtime",
   onChange,
 }) {
-  // { h: 0, m: 0, s: 0 }
+  // Time looks like this: { h: 0, m: 0, s: 0 }
+  // Time will be strings to display empty fields.
   const defaultTime = DEFAULTINPUT[setting];
   const [time, setTime] = useState(defaultTime);
 
@@ -22,7 +24,8 @@ function TimeInput({
 
   // Return the time and setting with every change to the parent module.
   useEffect(() => {
-    onChange({ input: time, setting });
+    const cleanTime = replaceNaN(time, defaultTime);
+    onChange({ input: cleanTime, setting });
   }, [time]);
 
   // Reset the time when mode is changed.
@@ -39,7 +42,7 @@ function TimeInput({
         value={time.h}
         onChange={handleChange}
         min={defaultTime.h}
-        max=""
+        max={MAXINPUT.hours}
       />
       <Input
         name="m"

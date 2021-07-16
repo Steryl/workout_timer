@@ -7,6 +7,7 @@ function FormatTime({ h, m, s }) {
   return { h, m: format(m), s: format(s) };
 }
 
+// TODO change functionnames to camelcase.
 // Changes seconds to time format.
 function ToTime(seconds = 0) {
   const s = Math.floor(seconds % 60);
@@ -34,6 +35,45 @@ const GetDuration = (input) => {
   const duration = input.rounds * ToSeconds(totalTime);
   return duration;
 };
+
+// Replaces NaN in a time object with the default unit.
+const replaceNaN = (time, defaultTime) => {
+  const newTime = {};
+
+  for (const unit in time) {
+    newTime[unit] = isNaN(time[unit]) ? defaultTime[unit] : time[unit];
+  }
+  return newTime;
+};
+
+// // Replaces NaN with defaultinput.
+// const removeNaN = (input, DEFAULTINPUT) => {
+//   // console.log("input", input);
+
+//   // Default the value of each key in an object if it is NaN.
+//   const replaceChild = (object, defaultObject) => {
+//     // console.log(object);
+//     // console.log(defaultObject);
+//     for (let key in object) {
+//       object.key = isNaN(key) && defaultObject.key;
+//     }
+//     return object;
+//   };
+
+//   // For rounds replace NaN on top level.
+//   let newInput = replaceChild(input, DEFAULTINPUT);
+
+//   // console.log("newinput", newInput);
+
+//   // // For units replace NaN one level down.
+//   // for ( setting in input) {
+//   //   let newInput.setting = replaceChild()
+//   // }
+
+//   // console.log({ shouldReplace(input) });
+//   return newInput;
+// };
+// //     setting = setting.map((unit) => unit = isNaN(unit) && DEFAULTINPUT.setting.unit)
 
 // Returns true when the time and seconds are the same.
 const compareTime = (time, elapsed) => {
@@ -75,4 +115,4 @@ const GetFinish = ({ timers, elapsed, status, callbacks }) => {
   }
 };
 
-export { ToTime, ToSeconds, GetDuration, GetFinish, FormatTime };
+export { ToTime, ToSeconds, GetDuration, replaceNaN, GetFinish, FormatTime };

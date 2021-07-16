@@ -1,11 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
+//TODO clean up inputs
 import { useEffect, useState } from "react";
-import { DEFAULTINPUT } from "Static";
+import { DEFAULTINPUT, INPUTS, MODES } from "Static";
+import { GetDuration } from "Functions";
 import Select from "components/Select";
 import React from "react";
-import TimeInput from "components/TimeInput";
-import Rounds from "components/Rounds";
 
 // Get input components for each mode.
 function InputForm({ onChange }) {
@@ -14,7 +14,13 @@ function InputForm({ onChange }) {
   // Setting can be endtime, worktime or rounds.
   // Input can be either timeobject or integer for rounds.
   const handleInput = ({ input, setting }) => {
-    setForm({ ...form, [setting]: input });
+    const newForm = { ...form, [setting]: input };
+
+    // Empty fields are NaN, take default value for those.
+    // const cleanForm = removeNaN(newForm, DEFAULTINPUT);
+    const duration = GetDuration(newForm);
+    const countup = MODES[form.mode].countup;
+    setForm({ ...newForm, duration, countup });
   };
 
   // When selecting a different mode reset the input.
@@ -22,32 +28,28 @@ function InputForm({ onChange }) {
     setForm({ ...DEFAULTINPUT, mode });
   };
 
+  // When the input on the form changes, return it.
   useEffect(() => {
     onChange(form);
   }, [form]);
 
-  const inputForms = {
-    stopwatch: <TimeInput mode={form.mode} onChange={handleInput} />,
-    countdown: <TimeInput mode={form.mode} onChange={handleInput} />,
-    xy: (
-      <>
-        <Rounds mode={form.mode} onChange={handleInput} />
-        <TimeInput mode={form.mode} onChange={handleInput} />
-      </>
-    ),
-    tabata: (
-      <>
-        <Rounds mode={form.mode} onChange={handleInput} />
-        <TimeInput setting="worktime" mode={form.mode} onChange={handleInput} />
-        <TimeInput mode={form.mode} onChange={handleInput} />
-      </>
-    ),
+  // Return an array of input components, depending on the mode.
+  const getInputs = () => {
+    const inputs = MODES[form.mode].inputs;
+
+    return inputs.map((input, i) =>
+      React.cloneElement(INPUTS[input], {
+        key: i,
+        mode: form.mode,
+        onChange: handleInput,
+      })
+    );
   };
 
   return (
     <>
       <Select onChange={handleSelect} />
-      <div className="inputform">{inputForms[form.mode]}</div>
+      <div className="inputform">{getInputs()}</div>
     </>
   );
 }

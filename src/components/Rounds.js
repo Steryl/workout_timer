@@ -2,7 +2,7 @@
 
 import Input from "components/Input";
 import { useEffect, useState } from "react";
-import { DEFAULTINPUT } from "Static";
+import { DEFAULTINPUT, MAXINPUT } from "Static";
 
 function Rounds({ mode, onChange }) {
   const defaultRounds = DEFAULTINPUT.rounds;
@@ -12,21 +12,25 @@ function Rounds({ mode, onChange }) {
     setRounds(input);
   };
 
+  // When rounds is changed return it to the parent.
+  // Bring the setting to discern it from 'timeinput'.
   useEffect(() => {
     onChange({ input: rounds, setting: "rounds" });
   }, [rounds]);
 
+  // When mode is changed we return to default.
   useEffect(() => {
     setRounds(defaultRounds);
   }, [mode]);
 
-  // TODO set max rounds.
   return (
     <Input
       name="rounds"
       value={rounds}
       onChange={handleChange}
       setting="rounds"
+      min={defaultRounds}
+      max={MAXINPUT.rounds}
     />
   );
 }

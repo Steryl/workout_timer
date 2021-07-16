@@ -1,4 +1,6 @@
 import { FormatTime } from "Functions";
+import TimeInput from "components/TimeInput";
+import Rounds from "components/Rounds";
 
 // Modes without rounds need 'rounds' to be 1.
 const DEFAULTINPUT = {
@@ -10,18 +12,25 @@ const DEFAULTINPUT = {
   countup: true,
 };
 
-const MODES = {
-  stopwatch: ["endtime"],
-  countdown: ["endtime"],
-  xy: ["rounds", "endtime"],
-  tabata: ["rounds", "worktime", "endtime"],
+// Choose the maximum values for these inputs.
+// Minutes and seconds are 59 by default.
+const MAXINPUT = {
+  hours: 99,
+  rounds: 99,
 };
 
-const COUNTUP = {
-  stopwatch: true,
-  countdown: false,
-  xy: false,
-  tabata: false,
+// Individual settings of each mode.
+const MODES = {
+  stopwatch: { inputs: ["endtime"], countup: true },
+  countdown: { inputs: ["endtime"], countup: false },
+  xy: { inputs: ["rounds", "endtime"], countup: false },
+  tabata: { inputs: ["rounds", "worktime", "endtime"], countup: false },
+};
+
+const INPUTS = {
+  endtime: <TimeInput />,
+  worktime: <TimeInput setting="worktime" />,
+  rounds: <Rounds />,
 };
 
 // Labels that are displayed to the user.
@@ -114,4 +123,4 @@ const GetMessage = ({ timer, status, phase }) => {
   return message[phase];
 };
 
-export { MODES, LABELS, COUNTUP, DEFAULTINPUT, GetMessage };
+export { MODES, INPUTS, MAXINPUT, LABELS, DEFAULTINPUT, GetMessage };

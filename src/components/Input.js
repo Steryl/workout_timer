@@ -10,9 +10,10 @@ function Input({ name, value, min = 0, max = "", onChange }) {
   const label = LABELS.units[name];
 
   // When input is changes check the validity and set the state.
+  // Empty field will be valid but return as NaN.
   const handleChange = (e) => {
     const { validity, value: newValue } = e.target;
-    if (validity) {
+    if (validity.valid) {
       setInput(parseInt(newValue));
     }
   };
