@@ -1,4 +1,4 @@
-import { FormatTime } from "Functions";
+import { formatTime } from "Functions";
 import TimeInput from "components/TimeInput";
 import Rounds from "components/Rounds";
 
@@ -76,7 +76,7 @@ const GetMessage = ({ timer, status, phase }) => {
 
   // Return a string with formatted time.
   const getTime = (setting) => {
-    const { h, m, s } = FormatTime(setting);
+    const { h, m, s } = formatTime(setting);
     return `${h}:${m}:${s}`;
   };
 
@@ -84,6 +84,7 @@ const GetMessage = ({ timer, status, phase }) => {
     return <div className="line">{string}</div>;
   };
 
+  // TODO create .format style, and put in message object.
   // Messages to display.
   const endtimeAtStart = style(`${endTimeLabel}: ${getTime(endtime)}`);
   const worktimeAtStart = style(`${workTimeLabel}: ${getTime(worktime)}`);

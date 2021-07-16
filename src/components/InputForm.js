@@ -3,7 +3,7 @@
 //TODO clean up inputs
 import { useEffect, useState } from "react";
 import { DEFAULTINPUT, INPUTS, MODES } from "Static";
-import { GetDuration } from "Functions";
+import { getDuration } from "Functions";
 import Select from "components/Select";
 import React from "react";
 
@@ -18,7 +18,7 @@ function InputForm({ onChange }) {
 
     // Empty fields are NaN, take default value for those.
     // const cleanForm = removeNaN(newForm, DEFAULTINPUT);
-    const duration = GetDuration(newForm);
+    const duration = getDuration(newForm);
     const countup = MODES[form.mode].countup;
     setForm({ ...newForm, duration, countup });
   };

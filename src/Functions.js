@@ -1,5 +1,5 @@
 // Turns 1:1:1 into 1:01:01
-function FormatTime({ h, m, s }) {
+function formatTime({ h, m, s }) {
   const format = (number) => {
     return (number < 10 ? "0" : "") + number;
   };
@@ -9,7 +9,7 @@ function FormatTime({ h, m, s }) {
 
 // TODO change functionnames to camelcase.
 // Changes seconds to time format.
-function ToTime(seconds = 0) {
+function toTime(seconds = 0) {
   const s = Math.floor(seconds % 60);
   const m = Math.floor((seconds / 60) % 60);
   const h = Math.floor(seconds / 3600);
@@ -18,21 +18,21 @@ function ToTime(seconds = 0) {
 }
 
 // Takes time-object and returns total seconds.
-const ToSeconds = ({ h, m, s }) => {
+const toSeconds = ({ h, m, s }) => {
   return h * 3600 + m * 60 + s;
 };
 
 // Add the time objects to each other.
-const AddTimes = (first, second) => {
-  const a = ToSeconds(first);
-  const b = ToSeconds(second);
-  return ToTime(a + b);
+const addTimes = (first, second) => {
+  const a = toSeconds(first);
+  const b = toSeconds(second);
+  return toTime(a + b);
 };
 
 // Returns the duration of the current input in seconds.
-const GetDuration = (input) => {
-  const totalTime = AddTimes(input.worktime, input.endtime);
-  const duration = input.rounds * ToSeconds(totalTime);
+const getDuration = (input) => {
+  const totalTime = addTimes(input.worktime, input.endtime);
+  const duration = input.rounds * toSeconds(totalTime);
   return duration;
 };
 
@@ -46,42 +46,13 @@ const replaceNaN = (time, defaultTime) => {
   return newTime;
 };
 
-// // Replaces NaN with defaultinput.
-// const removeNaN = (input, DEFAULTINPUT) => {
-//   // console.log("input", input);
-
-//   // Default the value of each key in an object if it is NaN.
-//   const replaceChild = (object, defaultObject) => {
-//     // console.log(object);
-//     // console.log(defaultObject);
-//     for (let key in object) {
-//       object.key = isNaN(key) && defaultObject.key;
-//     }
-//     return object;
-//   };
-
-//   // For rounds replace NaN on top level.
-//   let newInput = replaceChild(input, DEFAULTINPUT);
-
-//   // console.log("newinput", newInput);
-
-//   // // For units replace NaN one level down.
-//   // for ( setting in input) {
-//   //   let newInput.setting = replaceChild()
-//   // }
-
-//   // console.log({ shouldReplace(input) });
-//   return newInput;
-// };
-// //     setting = setting.map((unit) => unit = isNaN(unit) && DEFAULTINPUT.setting.unit)
-
 // Returns true when the time and seconds are the same.
 const compareTime = (time, elapsed) => {
-  return ToSeconds(time) === elapsed;
+  return toSeconds(time) === elapsed;
 };
 
 // When the timer should be finished call the right callback.
-const GetFinish = ({ timers, elapsed, status, callbacks }) => {
+const getFinish = ({ timers, elapsed, status, callbacks }) => {
   const { endRound, endWork, endTimer, endAll } = callbacks;
 
   const timerCount = timers.length;
@@ -115,4 +86,4 @@ const GetFinish = ({ timers, elapsed, status, callbacks }) => {
   }
 };
 
-export { ToTime, ToSeconds, GetDuration, replaceNaN, GetFinish, FormatTime };
+export { toTime, toSeconds, getDuration, replaceNaN, getFinish, formatTime };

@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
 import React, { useEffect, useState } from "react";
-import { GetFinish } from "Functions";
+import { getFinish } from "Functions";
 
 const AppContextClass = React.createContext({});
 
@@ -103,7 +103,7 @@ const AppProvider = ({ children }) => {
     const callbacks = { endRound, endWork, endTimer, endAll };
 
     if (timers.length > 0) {
-      GetFinish({ timers, elapsed, status, callbacks });
+      getFinish({ timers, elapsed, status, callbacks });
     }
   };
 

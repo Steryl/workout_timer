@@ -4,7 +4,7 @@ import Clock from "components/Clock";
 import { AppContext } from "AppProvider";
 import { useContext, useEffect, useRef } from "react";
 import { LABELS } from "Static";
-import { ToTime, FormatTime } from "Functions";
+import { toTime, formatTime } from "Functions";
 
 // Returns the duration of all timers combined.
 function TotalTime() {
@@ -18,7 +18,7 @@ function TotalTime() {
     });
   }
 
-  const { h, m, s } = FormatTime(ToTime(TotalDuration));
+  const { h, m, s } = formatTime(toTime(TotalDuration));
 
   return (
     <div className="totaltime">
@@ -31,7 +31,7 @@ function TotalTime() {
 function Timer({ timer, id }) {
   const { removeTimer, status, onSelect } = useContext(AppContext);
   const { mode, duration } = timer;
-  const { h, m, s } = FormatTime(ToTime(duration));
+  const { h, m, s } = formatTime(toTime(duration));
 
   // Process only one event at a time, because button overlays timer.
   const handleSelect = (e) => {

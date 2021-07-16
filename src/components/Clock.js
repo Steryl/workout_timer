@@ -2,7 +2,7 @@
 
 import { AppContext } from "AppProvider";
 import { useContext, useEffect } from "react";
-import { ToTime, FormatTime, ToSeconds } from "Functions.js";
+import { toTime, formatTime, toSeconds } from "Functions.js";
 import Button from "components/Button";
 import "App.css";
 import { LABELS, GetMessage } from "Static";
@@ -35,12 +35,12 @@ function Message() {
 function Display() {
   const { elapsed, timers, status, onResetAll } = useContext(AppContext);
   const present = timers.length > 0;
-  let time = ToTime(0);
+  let time = toTime(0);
 
   // Return time togo instead of elapsed time.
   const down = (endtime) => {
-    const togo = ToSeconds(endtime) - elapsed;
-    return ToTime(togo);
+    const togo = toSeconds(endtime) - elapsed;
+    return toTime(togo);
   };
 
   // Get the right direction of time.
@@ -48,7 +48,7 @@ function Display() {
     const timer = timers[status.timerIndex];
     const { endtime, worktime, countup } = timer;
     if (countup) {
-      time = ToTime(elapsed);
+      time = toTime(elapsed);
     } else {
       if (timer.mode === "tabata") {
         time = status.work ? worktime : endtime;
@@ -68,7 +68,7 @@ function Display() {
     status.finished && "finished"
   }`;
 
-  const { h, m, s } = FormatTime(time);
+  const { h, m, s } = formatTime(time);
 
   return (
     <div className="rightside">
