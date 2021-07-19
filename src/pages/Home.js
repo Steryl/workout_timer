@@ -9,9 +9,9 @@ import { toTime, formatTime } from "Functions";
 // Returns the duration of all timers combined.
 function TotalTime() {
   const { timers } = useContext(AppContext);
-  let TotalDuration = 0;
 
   // If there are timers, add their durations.
+  let TotalDuration = 0;
   if (timers.length > 0) {
     timers.forEach((timer) => {
       TotalDuration = TotalDuration + timer.duration;

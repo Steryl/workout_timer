@@ -36,14 +36,26 @@ const getDuration = (input) => {
   return duration;
 };
 
-// Replaces NaN in a time object with the default unit.
-const replaceNaN = (time, defaultTime) => {
-  const newTime = {};
+// Replaces NaN with the default, either in time-object or rounds.
+const replaceNaN = (input, defaults) => {
+  // This method is used for either rounds or units of time.
+  const replace = (unit, replacement) => {
+    return isNaN(unit) ? replacement : unit;
+  };
 
-  for (const unit in time) {
-    newTime[unit] = isNaN(time[unit]) ? defaultTime[unit] : time[unit];
-  }
-  return newTime;
+  // When the input is a time object then we check to replace each unit.
+  const replaceTime = (time, defaultTime) => {
+    const newTime = { ...time };
+    for (const unit in time) {
+      newTime[unit] = replace(time[unit], defaultTime[unit]);
+    }
+    return newTime;
+  };
+
+  // Select method to use, rounds would be int, time an object.
+  let method = typeof input === "object" ? replaceTime : replace;
+
+  return method(input, defaults);
 };
 
 // Returns true when the time and seconds are the same.

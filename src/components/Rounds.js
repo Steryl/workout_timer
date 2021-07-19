@@ -3,6 +3,7 @@
 import Input from "components/Input";
 import { useEffect, useState } from "react";
 import { DEFAULTINPUT, MAXINPUT } from "Static";
+import { replaceNaN } from "Functions";
 
 function Rounds({ mode, onChange }) {
   const defaultRounds = DEFAULTINPUT.rounds;
@@ -15,7 +16,8 @@ function Rounds({ mode, onChange }) {
   // When rounds is changed return it to the parent.
   // Bring the setting to discern it from 'timeinput'.
   useEffect(() => {
-    onChange({ input: rounds, setting: "rounds" });
+    const cleanRounds = replaceNaN(rounds, defaultRounds);
+    onChange({ input: cleanRounds, setting: "rounds" });
   }, [rounds]);
 
   // When mode is changed we return to default.
