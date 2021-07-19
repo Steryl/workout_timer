@@ -12,6 +12,14 @@ const DEFAULTINPUT = {
   countup: true,
 };
 
+const DEFAULTSTATUS = {
+  finished: false,
+  running: false,
+  timerIndex: 0,
+  round: 1,
+  work: true,
+};
+
 // Choose the maximum values for these inputs.
 // Minutes and seconds are 59 by default.
 const MAXINPUT = {
@@ -124,4 +132,12 @@ const GetMessage = ({ timer, status, phase }) => {
   return message[phase];
 };
 
-export { MODES, INPUTS, MAXINPUT, LABELS, DEFAULTINPUT, GetMessage };
+export {
+  MODES,
+  INPUTS,
+  MAXINPUT,
+  LABELS,
+  DEFAULTINPUT,
+  DEFAULTSTATUS,
+  GetMessage,
+};

@@ -2,16 +2,9 @@
 
 import React, { useEffect, useState } from "react";
 import { getFinish } from "Functions";
+import { DEFAULTSTATUS } from "Static";
 
 const AppContextClass = React.createContext({});
-
-const DEFAULTSTATUS = {
-  finished: false,
-  running: false,
-  timerIndex: 0,
-  round: 1,
-  work: true,
-};
 
 // Provides context to both 'home' and 'add' page.
 const AppProvider = ({ children }) => {
