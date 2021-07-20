@@ -1,8 +1,5 @@
-import { render, screen } from '@testing-library/react';
-import App from './App';
+import { toSeconds } from "Functions";
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+test("toSeconds", () => {
+  expect(toSeconds({ h: 0, m: 2, s: 30 })).toBe(150);
 });

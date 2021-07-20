@@ -88,6 +88,8 @@ const AppProvider = ({ children }) => {
     checkFinish();
   }, [elapsed]);
 
+  // If the last timer is removed reset everything.
+  // To prevent error with timerIndex going to -1.
   useEffect(() => {
     timers.length < 1 && resetAll();
   }, [timers]);

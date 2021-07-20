@@ -5,7 +5,7 @@ import { AppContext } from "AppProvider";
 import { LABELS, DEFAULTINPUT } from "Static";
 import InputForm from "components/InputForm";
 
-// Return a form to add a timer.
+// Return a page with a form to add a timer.
 function Add() {
   const [input, setInput] = useState(DEFAULTINPUT);
   const [valid, setValid] = useState(false);
